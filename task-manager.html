@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Manager</title>
+
+<style>
+body {
+  font-family: 'Segoe UI';
+  background: linear-gradient(135deg, #1d2b64, #f8cdda);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+}
+
+input, button {
+  padding: 10px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.filters button {
+  width: auto;
+  margin-right: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Task Manager</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter task">
+  <input type="date" id="dueDate">
+  <button onclick="addTask()">Add Task</button>
+
+  <div class="filters">
+    <button onclick="filterTasks('all')">All</button>
+    <button onclick="filterTasks('completed')">Completed</button>
+    <button onclick="filterTasks('pending')">Pending</button>
+  </div>
+
+  <div id="taskList"></div>
+</div>
+
+<script>
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let filter = "all";
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function addTask() {
+  let text = document.getElementById("taskInput").value;
+  let date = document.getElementById("dueDate").value;
+
+  if (!text) return alert("Enter task");
+
+  tasks.push({ text, date, completed: false });
+  saveTasks();
+  displayTasks();
+}
+
+function displayTasks() {
+  let list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  let filtered = tasks.filter(task => {
+    if (filter === "completed") return task.completed;
+    if (filter === "pending") return !task.completed;
+    return true;
+  });
+
+  filtered.forEach((task, index) => {
+    list.innerHTML += `
+      <div class="task">
+        <span class="${task.completed ? 'completed' : ''}">
+          ${task.text} (${task.date || "No date"})
+        </span>
+        <div>
+          <button onclick="toggleTask(${index})">✔</button>
+          <button onclick="deleteTask(${index})">❌</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function toggleTask(index) {
+  tasks[index].completed = !tasks[index].completed;
+  saveTasks();
+  displayTasks();
+}
+
+function deleteTask(index) {
+  tasks.splice(index, 1);
+  saveTasks();
+  displayTasks();
+}
+
+function filterTasks(type) {
+  filter = type;
+  displayTasks();
+}
+
+displayTasks();
+</script>
+
+</body>
+</html>
