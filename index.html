@@ -1,0 +1,177 @@
+<index.html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Management System</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #eef2f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      margin: 5px;
+      width: 180px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      color: white;
+    }
+
+    .btn-add { background: #28a745; }
+    .btn-update { background: #007bff; }
+    .btn-delete { background: #dc3545; }
+
+    .search-box {
+      margin-top: 15px;
+      width: 250px;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: #343a40;
+      color: white;
+    }
+
+    tr:hover {
+      background: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Student Management System</h1>
+
+  <input type="text" id="name" placeholder="Enter Name">
+  <input type="text" id="roll" placeholder="Enter Roll No">
+  <button class="btn-add" onclick="addOrUpdate()">Save</button>
+
+  <br>
+
+  <input type="text" id="search" class="search-box" placeholder="Search..." onkeyup="searchStudent()">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll No</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+</div>
+
+<script>
+let students = JSON.parse(localStorage.getItem("students")) || [];
+let editIndex = -1;
+
+function displayStudents(list = students) {
+  const table = document.getElementById("studentTable");
+  table.innerHTML = "";
+
+  list.forEach((student, index) => {
+    table.innerHTML += `
+      <tr>
+        <td>${student.name}</td>
+        <td>${student.roll}</td>
+        <td>
+          <button class="btn-update" onclick="editStudent(${index})">Edit</button>
+          <button class="btn-delete" onclick="deleteStudent(${index})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function addOrUpdate() {
+  const name = document.getElementById("name").value.trim();
+  const roll = document.getElementById("roll").value.trim();
+
+  if (!name || !roll) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (editIndex === -1) {
+    students.push({ name, roll });
+  } else {
+    students[editIndex] = { name, roll };
+    editIndex = -1;
+  }
+
+  localStorage.setItem("students", JSON.stringify(students));
+
+  document.getElementById("name").value = "";
+  document.getElementById("roll").value = "";
+
+  displayStudents();
+}
+
+function editStudent(index) {
+  document.getElementById("name").value = students[index].name;
+  document.getElementById("roll").value = students[index].roll;
+  editIndex = index;
+}
+
+function deleteStudent(index) {
+  students.splice(index, 1);
+  localStorage.setItem("students", JSON.stringify(students));
+  displayStudents();
+}
+
+function searchStudent() {
+  const searchValue = document.getElementById("search").value.toLowerCase();
+
+  const filtered = students.filter(student =>
+    student.name.toLowerCase().includes(searchValue) ||
+    student.roll.toLowerCase().includes(searchValue)
+  );
+
+  displayStudents(filtered);
+}
+
+// Initial display
+displayStudents();
+</script>
+
+</body>
+</html>
