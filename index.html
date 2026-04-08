@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Management System</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #00c6ff;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0072ff;
+}
+
+.search-box {
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: rgba(0,0,0,0.3);
+}
+
+tr {
+  background: rgba(255,255,255,0.1);
+}
+
+.action-btn {
+  margin: 2px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.delete {
+  background: #ff4d4d;
+}
+
+.edit {
+  background: #28a745;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Student Management System</h1>
+
+  <div class="input-group">
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="text" id="roll" placeholder="Enter Roll No">
+    <button onclick="addStudent()">Add</button>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll No</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+</div>
+
+<script>
+let students = JSON.parse(localStorage.getItem("students")) || [];
+
+function saveData() {
+  localStorage.setItem("students", JSON.stringify(students));
+}
+
+function addStudent() {
+  let name = document.getElementById("name").value.trim();
+  let roll = document.getElementById("roll").value.trim();
+
+  if (!name || !roll) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  students.push({ name, roll });
+  saveData();
+  displayStudents();
+  clearInputs();
+}
+
+function displayStudents(data = students) {
+  let table = document.getElementById("studentTable");
+  table.innerHTML = "";
+
+  data.forEach((student, index) => {
+    table.innerHTML += `
+      <tr>
+        <td>${student.name}</td>
+        <td>${student.roll}</td>
+        <td>
+          <button class="action-btn edit" onclick="editStudent(${index})">Edit</button>
+          <button class="action-btn delete" onclick="deleteStudent(${index})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function deleteStudent(index) {
+  students.splice(index, 1);
+  saveData();
+  displayStudents();
+}
+
+function editStudent(index) {
+  let newName = prompt("Enter new name", students[index].name);
+  let newRoll = prompt("Enter new roll", students[index].roll);
+
+  if (newName && newRoll) {
+    students[index] = { name: newName.trim(), roll: newRoll.trim() };
+    saveData();
+    displayStudents();
+  }
+}
+
+function searchStudent() {
+  let value = document.getElementById("search").value.toLowerCase();
+  let filtered = students.filter(s =>
+    s.name.toLowerCase().includes(value) ||
+    s.roll.toLowerCase().includes(value)
+  );
+  displayStudents(filtered);
+}
+
+function clearInputs() {
+  document.getElementById("name").value = "";
+  document.getElementById("roll").value = "";
+}
+
+displayStudents();
+</script>
+
+</body>
+</html>
