@@ -3,206 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Management System</title>
+<title>Sohaib Naeem | Portfolio</title>
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.container {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 25px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 700px;
+  background: #0f172a;
   color: white;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-h1 {
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: #020617;
+}
+
+nav h2 {
+  color: #38bdf8;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
   text-align: center;
-  margin-bottom: 20px;
+  padding: 80px 20px;
 }
 
-.input-group {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+.hero h1 {
+  font-size: 42px;
 }
 
-input {
-  flex: 1;
-  padding: 10px;
+.hero span {
+  color: #38bdf8;
+}
+
+.hero p {
+  margin: 15px 0;
+}
+
+.hero button {
+  padding: 10px 20px;
+  background: #38bdf8;
   border: none;
-  border-radius: 8px;
-  outline: none;
-}
-
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background: #00c6ff;
-  color: white;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+/* SKILLS */
+.skills {
+  padding: 50px;
+  text-align: center;
+}
+
+.skill-box {
+  display: inline-block;
+  background: #1e293b;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+/* PROJECTS */
+.projects {
+  padding: 50px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
   transition: 0.3s;
 }
 
-button:hover {
-  background: #0072ff;
+.project-card:hover {
+  transform: translateY(-5px);
 }
 
-.search-box {
-  margin-bottom: 15px;
+.project-card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #38bdf8;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  padding: 10px;
+/* CONTACT */
+.contact {
   text-align: center;
+  padding: 40px;
 }
 
-th {
-  background: rgba(0,0,0,0.3);
-}
-
-tr {
-  background: rgba(255,255,255,0.1);
-}
-
-.action-btn {
-  margin: 2px;
-  padding: 5px 8px;
-  font-size: 12px;
-}
-
-.delete {
-  background: #ff4d4d;
-}
-
-.edit {
-  background: #28a745;
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #020617;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>Student Management System</h1>
-
-  <div class="input-group">
-    <input type="text" id="name" placeholder="Enter Name">
-    <input type="text" id="roll" placeholder="Enter Roll No">
-    <button onclick="addStudent()">Add</button>
+<nav>
+  <h2>Sohaib.dev</h2>
+  <div>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
   </div>
+</nav>
 
-  <div class="search-box">
-    <input type="text" id="search" placeholder="Search student..." onkeyup="searchStudent()">
+<section class="hero">
+  <h1>Hi, I'm <span>Sohaib Naeem</span></h1>
+  <p>Frontend Developer | Software Engineering Student</p>
+  <button onclick="window.open('https://saibi-codes.github.io/student-management-system/')">
+    View My Work
+  </button>
+</section>
+
+<section id="skills" class="skills">
+  <h2>Skills</h2>
+  <div class="skill-box">HTML</div>
+  <div class="skill-box">CSS</div>
+  <div class="skill-box">JavaScript</div>
+  <div class="skill-box">GitHub</div>
+</section>
+
+<section id="projects" class="projects">
+  <h2>Projects</h2>
+
+  <div class="project-grid">
+
+    <div class="project-card">
+      <h3>Student Management System</h3>
+      <p>CRUD app with local storage</p>
+      <a href="https://saibi-codes.github.io/student-management-system/" target="_blank">Live Demo</a>
+    </div>
+
+    <div class="project-card">
+      <h3>Task Manager App</h3>
+      <p>Task app with filter, due date, and storage</p>
+      <a href="https://saibi-codes.github.io/student-management-system/task-manager.html" target="_blank">Live Demo</a>
+    </div>
+
   </div>
+</section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Roll No</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="studentTable"></tbody>
-  </table>
-</div>
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p>Email: msohaib043@gmail.com</p>
+  <p>Phone: +92 307 9024110</p>
+</section>
 
-<script>
-let students = JSON.parse(localStorage.getItem("students")) || [];
-
-function saveData() {
-  localStorage.setItem("students", JSON.stringify(students));
-}
-
-function addStudent() {
-  let name = document.getElementById("name").value.trim();
-  let roll = document.getElementById("roll").value.trim();
-
-  if (!name || !roll) {
-    alert("Please fill all fields");
-    return;
-  }
-
-  students.push({ name, roll });
-  saveData();
-  displayStudents();
-  clearInputs();
-}
-
-function displayStudents(data = students) {
-  let table = document.getElementById("studentTable");
-  table.innerHTML = "";
-
-  data.forEach((student, index) => {
-    table.innerHTML += `
-      <tr>
-        <td>${student.name}</td>
-        <td>${student.roll}</td>
-        <td>
-          <button class="action-btn edit" onclick="editStudent(${index})">Edit</button>
-          <button class="action-btn delete" onclick="deleteStudent(${index})">Delete</button>
-        </td>
-      </tr>
-    `;
-  });
-}
-
-function deleteStudent(index) {
-  students.splice(index, 1);
-  saveData();
-  displayStudents();
-}
-
-function editStudent(index) {
-  let newName = prompt("Enter new name", students[index].name);
-  let newRoll = prompt("Enter new roll", students[index].roll);
-
-  if (newName && newRoll) {
-    students[index] = { name: newName.trim(), roll: newRoll.trim() };
-    saveData();
-    displayStudents();
-  }
-}
-
-function searchStudent() {
-  let value = document.getElementById("search").value.toLowerCase();
-  let filtered = students.filter(s =>
-    s.name.toLowerCase().includes(value) ||
-    s.roll.toLowerCase().includes(value)
-  );
-  displayStudents(filtered);
-}
-
-function clearInputs() {
-  document.getElementById("name").value = "";
-  document.getElementById("roll").value = "";
-}
-
-displayStudents();
-</script>
+<footer>
+  <p>© 2026 Sohaib Naeem</p>
+</footer>
 
 </body>
 </html>
