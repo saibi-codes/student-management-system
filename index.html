@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Student Management System</title>
+<!-- This title will show up on LinkedIn when you share your link -->
+<title>Sohaib Naeem | Software Engineering Projects</title>
 
 <style>
 * {
@@ -17,8 +18,51 @@ body {
   background: linear-gradient(135deg, #667eea, #764ba2);
   min-height: 100vh;
   display: flex;
+  flex-direction: column; /* Changed to column to allow nav at top */
   align-items: center;
+  padding: 20px;
+}
+
+/* New Navigation Styles */
+.nav-container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.nav-container h3 {
+  color: white;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.project-links {
+  display: flex;
   justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  color: #00c6ff;
+  text-decoration: none;
+  font-weight: bold;
+  background: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.project-links a:hover {
+  background: #00c6ff;
+  color: white;
 }
 
 .container {
@@ -104,6 +148,17 @@ tr {
 </head>
 
 <body>
+
+<!-- NEW NAVIGATION SECTION -->
+<div class="nav-container">
+  <h3>Explore My Other Projects</h3>
+  <div class="project-links">
+    <a href="E-commerce.html">E-commerce</a>
+    <a href="task-manager.html">Task Manager</a>
+    <a href="academic portfolio.html">Portfolio</a>
+    <a href="Sohaib.dev.html">Dev Site</a>
+  </div>
+</div>
 
 <div class="container">
   <h1>Student Management System</h1>
