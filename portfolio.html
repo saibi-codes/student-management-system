@@ -3,49 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Student Academic Profile</title>
+
+    <style>
+        /* Your Custom CSS Starts Here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4; /* Adjusted for better readability */
+            color: #103ef9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #030303;
+            text-align: center;
+        }
+
+        h2 {
+            color: #030303;
+            text-align: left;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+
+        #intro {
+            background-color: #7cbb8d;
+            border-bottom: 2px solid #56a6cb;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        #intro h1, #intro h2 {
+            color: #0a0a0a;
+        }
+
+        .skills > .skill-list {
+            display: flex;
+            padding: 5px 10px;
+            gap: 30px;
+            margin-top: 15px;
+            list-style: none; /* Removes bullets from flex list */
+        }
+
+        .skill {
+            background-color: hsl(106, 37%, 55%);
+            color: #f9f5f5;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background-color: #555;
+            cursor: pointer;
+        }
+
+        .projects li {
+            list-style-type: circle;
+            color: rgb(74, 58, 15);
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        .projects li:first-child {
+            color: #072515;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        input[type="text"],
+        input[type="email"] {
+            display: block;
+            width: 50%;
+            max-width: 400px;
+            padding: 10px;
+            margin: 10px auto; /* Centering the inputs */
+            border: 1px solid #040101;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            color: white;
+            background-color: #050605;
+            border: none;
+            padding: 10px 20px;
+            display: block;
+            margin: 10px auto;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #222;
+            color: #fff;
+        }
+
+        .contact {
+            color: rgb(81, 4, 164);
+            font-weight: bold;
+            border-top: 2px solid #222222;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            background-color: #5998bc;
+            color: #719b10;
+            font-weight: bold;
+            margin-top: 40px;
+        }
+    </style>
 </head>
 <body>
 
     <header id="intro">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hello! I'm Sohaib, a passionate web designer who loves crafting elegant and responsive websites.</p>
+        <h1>Student Academic Profile</h1>
+        <p>This page shows student academic data using advanced CSS selectors.</p>
     </header>
 
     <section class="skills">
-        <h2>★ My Skills</h2>
+        <h2>Student Skills</h2>
         <div class="skill-list">
-            <span class="skill">HTML & CSS</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">React</span>
+            <span class="skill">HTML Coding</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Communication</span>
+            <span class="skill">Team Work</span>
         </div>
     </section>
 
     <section class="projects">
-        <h2>★ My Projects</h2>
+        <h2>Current Projects</h2>
         <ul>
-            <li class="project-item">Portfolio Website</li>
-            <li class="project-item">E-Commerce Design</li>
-            <li class="project-item">Blog Template</li>
+            <li>Personal Portfolio Website</li>
+            <li>Academic Record Database</li>
+            <li>E-Commerce UI Design</li>
         </ul>
     </section>
 
     <section class="contact">
-        <h2>★ Contact Me</h2>
+        <h2>Contact Me</h2>
         <form>
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Enter your name">
-
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
-
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
             <input type="submit" value="Send Message">
         </form>
     </section>
 
     <footer>
-        <p>© Virtual University of Pakistan</p>
+        © 2026 Student Profile - Built with CSS Selectors
     </footer>
 
 </body>
